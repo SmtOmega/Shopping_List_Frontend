@@ -8,7 +8,7 @@ import reducer, {
 } from "./reducer/reducer";
 
 const ItemContext = React.createContext();
-const url = "http://localhost:3001/items";
+const url = "https://mike-shopping-list.herokuapp.com/items";
 const initialState = {
   items: [],
   loading: false,
