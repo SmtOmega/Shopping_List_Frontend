@@ -4,13 +4,18 @@ import {useGlobalContext} from '../context'
 
 
 const ShoppingList = () => {
-    const {items, openModal, deleteItem, loading} = useGlobalContext()
+    const {items, openModal, deleteItem, loading, error} = useGlobalContext()
     if(loading){
         return <div className="container">
             <h1>loading...</h1>
         </div>
     }
-
+    if(error){
+        return <div className="container">
+            <h1>Something went Wrong, Check your Internet Connection...</h1>
+            
+        </div>
+    }
     return <main>
         <div className="container">
             <button className="add-btn" onClick={openModal}>Add Item</button>

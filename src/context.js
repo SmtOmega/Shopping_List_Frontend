@@ -5,13 +5,20 @@ import reducer, {
   REMOVE_ITEM,
   ITEM_LOADING,
   GET_ITEMS,
+  SET_ERROR,
 } from "./reducer/reducer";
 
+
+//https://mike-shopping-list.herokuapp.com/items
 const ItemContext = React.createContext();
+
+
+
 const url = "https://mike-shopping-list.herokuapp.com/items";
 const initialState = {
   items: [],
   loading: false,
+  error: false
 };
 
 const ItemProvider = ({ children }) => {
@@ -20,9 +27,15 @@ const ItemProvider = ({ children }) => {
 
   const fetchData = async () => {
     dispatch({ type: ITEM_LOADING });
-    const response = await fetch(url);
-    const items = await response.json();
-    dispatch({ type: GET_ITEMS, payload: items });
+    try {
+      const response = await axios(url);
+      if(response.status === 404){
+        dispatch({type: SET_ERROR})
+      }
+      dispatch({ type: GET_ITEMS, payload: response.data });
+    } catch (error) {
+      dispatch({type: SET_ERROR})
+    }
   };
 
   const addItem = async (item) => {
@@ -44,6 +57,9 @@ const ItemProvider = ({ children }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+
+
   return (
     <ItemContext.Provider
       value={{

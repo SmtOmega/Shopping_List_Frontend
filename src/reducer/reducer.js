@@ -2,6 +2,7 @@ export const ITEM_LOADING = "ITEM_LOADING";
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const GET_ITEMS = "GET_ITEMS";
+export const SET_ERROR = "SET_ERROR"
 
 const reducer = (state, action) => {
   if (action.type === ITEM_LOADING) {
@@ -21,6 +22,9 @@ const reducer = (state, action) => {
           items: action.payload,
           loading: false
       }
+  }
+  if(action.type === SET_ERROR){
+    return {...state, loading: false, error: true}
   }
 
   return state;

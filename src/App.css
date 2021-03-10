@@ -1,4 +1,8 @@
 
+h1{
+  text-transform: capitalize;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -9,7 +13,21 @@ nav {
   background: #000;
   
 }
-
+span {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.home-link {
+  color: #fff;
+  text-decoration: none;
+}
+.home-page {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .nav-container {
   margin: 0 auto;
   max-width: 1100px;
@@ -23,7 +41,16 @@ nav {
 .icon-toggle {
   display: none;
 }
-.add-btn {
+.link-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link-container li {
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.add-btn, .btn {
   margin-bottom: 10px;
   border: none;
   padding: 10px 15px;
@@ -111,6 +138,53 @@ article {
   box-shadow: 2px 3px 5px rgba(114, 113, 113, 0.6);
   outline: none;
 }
+
+/* login section */
+
+.form-container {
+  height: 50vh;
+  width: 400px;
+  text-align: center;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 2px 3px 7px rgba(209, 207, 207, 0.6);
+  border-radius: 5px;
+}
+.login-register-form {
+  width: 95%;
+  display:  flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+.form-input {
+  border: none;
+  width: 95%;
+  margin-bottom: 20px;
+  box-shadow: 2px 3px 5px rgba(100, 100, 100, 0.6);
+  padding: 13px 10px;
+  border-radius: 5px;
+}
+.login-btn {
+  width: 95%;
+}
+.login-register-btn {
+  color: #fff;
+  text-decoration: none;
+}
+.login-register-btn:hover {
+  background-color: #fff;
+  color: #000;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  transition: all 0.3s linear;
+}
+
 @media screen and (max-width: 750px){
 
   .nav-container {
@@ -128,6 +202,9 @@ article {
     display: inline;
   }
   .link-container {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     height: 0;
     overflow: hidden;
     transition: all 0.4s linear;
