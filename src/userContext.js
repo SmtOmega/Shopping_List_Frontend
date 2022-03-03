@@ -32,11 +32,19 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const history = useHistory()
+
   const getLoggedIn = async () => {
     dispatch({ type: LOADING });
-    const response = await axios(url);
-    dispatch({ type: CHECK_LOGIN, payload: response.data });
+    try {
+      const response = await axios(url);
+      console.log(response)
+      dispatch({ type: CHECK_LOGIN, payload: response.data });
+    } catch (error) {
+      
+    }
+
   };
+
   const userLogin = async (details) => {
     dispatch({ type: LOADING });
     try {

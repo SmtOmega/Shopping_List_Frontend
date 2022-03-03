@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { useUserGlobalContext } from "../userContext";
 
 const HomePage = () => {
-  const { loggedIn, user } = useUserGlobalContext();
+  const { loggedIn, user, fetchData } = useUserGlobalContext();
   const { name } = user;
-  
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/shopping");
+  };
   if (loggedIn) {
     return (
       <main>
@@ -14,11 +17,9 @@ const HomePage = () => {
           <p>
             Welcome to the shopping List app Click
             <span>
-              <Link to="/shopping">
-                <button>
-                  <FaArrowRight />
-                </button>
-              </Link>
+              <button onClick={handleClick}>
+                <FaArrowRight />
+              </button>
             </span>
             to add Items to your list
           </p>

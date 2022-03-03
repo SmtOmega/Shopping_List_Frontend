@@ -69,6 +69,7 @@ const ItemProvider = ({ children }) => {
         openModal,
         closeModal,
         isModalOpen,
+        fetchData
       }}
     >
       {children}
