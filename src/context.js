@@ -32,7 +32,7 @@ const ItemProvider = ({ children }) => {
       if(response.status === 404){
         dispatch({type: SET_ERROR})
       }
-      dispatch({ type: GET_ITEMS, payload: response.data });
+      dispatch({ type: GET_ITEMS, payload: response.data.item });
     } catch (error) {
       dispatch({type: SET_ERROR})
     }
@@ -68,8 +68,7 @@ const ItemProvider = ({ children }) => {
         deleteItem,
         openModal,
         closeModal,
-        isModalOpen,
-        fetchData
+        isModalOpen
       }}
     >
       {children}

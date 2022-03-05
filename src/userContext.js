@@ -13,14 +13,13 @@ const userContext = React.createContext();
 
 const url = "https://mike-shopping-list.herokuapp.com/user/loggedIn";
 const getLocastorage = () => {
-  let user = localStorage.getItem('user')
-  if(user){
-    return JSON.parse(user)
+  let user = localStorage.getItem("user");
+  if (user) {
+    return JSON.parse(user);
+  } else {
+    return {};
   }
-  else {
-    return {}
-  }
-}
+};
 
 const initialState = {
   user: getLocastorage(),
@@ -31,18 +30,14 @@ const initialState = {
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const history = useHistory()
+  const history = useHistory();
 
   const getLoggedIn = async () => {
     dispatch({ type: LOADING });
     try {
       const response = await axios(url);
-      console.log(response)
       dispatch({ type: CHECK_LOGIN, payload: response.data });
-    } catch (error) {
-      
-    }
-
+    } catch (error) {}
   };
 
   const userLogin = async (details) => {
@@ -52,40 +47,39 @@ export const UserProvider = ({ children }) => {
         "https://mike-shopping-list.herokuapp.com/user/login",
         details
       );
-      console.log(response)
-      dispatch({ type: LOGIN_USER, payload: response.data.user });
-       await getLoggedIn();
-       history.push('/')
-    } catch (error) {
-      
-    }
 
+      dispatch({ type: LOGIN_USER, payload: response.data.user });
+      await getLoggedIn();
+      history.push("/");
+    } catch (error) {}
   };
 
   const registerUser = async (user) => {
     dispatch({ type: LOADING });
-    const response = await axios.post("https://mike-shopping-list.herokuapp.com/user", user);
+    const response = await axios.post(
+      "https://mike-shopping-list.herokuapp.com/user",
+      user
+    );
     dispatch({ type: SIGNUP_USER, payload: response.data.user });
-    await getLoggedIn()
-    history.push('/')
+    await getLoggedIn();
+    history.push("/");
   };
   const logOutUser = async () => {
     dispatch({ type: LOADING });
     await axios("https://mike-shopping-list.herokuapp.com/user/logout");
     dispatch({ type: LOGOUT_USER });
     getLoggedIn();
-    history.push('/')
-    
+    history.push("/");
   };
   useEffect(() => {
     getLoggedIn();
   }, []);
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(state.user))
-  }, [state.user])
+    localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
   return (
     <userContext.Provider
-      value={{ ...state, userLogin, registerUser, logOutUser, getLoggedIn}}
+      value={{ ...state, userLogin, registerUser, logOutUser, getLoggedIn }}
     >
       {children}
     </userContext.Provider>

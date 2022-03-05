@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useUserGlobalContext } from "../userContext";
 
 const HomePage = () => {
-  const { loggedIn, user, fetchData } = useUserGlobalContext();
+  const { loggedIn, user} = useUserGlobalContext();
   const { name } = user;
   const history = useHistory();
   const handleClick = () => {
